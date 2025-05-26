@@ -1,3 +1,5 @@
+
+# Base de datos
 # Instalar paquetes si no los tienes
 install.packages(c("tidyverse", "plm"))
 
