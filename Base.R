@@ -65,7 +65,12 @@ b9 <- read_excel(paste0(archivo, "vacc_rate.xlsx")) %>%
 b10 <- read_excel(paste0(archivo, "lex.xlsx")) %>%
   pivot_longer(cols = -country, names_to = "año", values_to = "expectativa") %>%
   rename(pais = country)
-
+b11 <- read_excel(paste0(archivo, "life_expectancy_female.xlsx")) %>%
+  pivot_longer(cols = -country, names_to = "año", values_to = "expectativa_feme") %>%
+  rename(pais = country)
+b12 <- read_excel(paste0(archivo, "life_expectancy_female.xlsx")) %>%
+  pivot_longer(cols = -country, names_to = "año", values_to = "expectativa_masc") %>%
+  rename(pais = country)
 # Unir bases paso a paso
 base_union <- b1 %>%
   left_join(b2, by = c("pais", "año")) %>%
@@ -77,6 +82,8 @@ base_union <- b1 %>%
   left_join(b8, by = c("pais", "año")) %>%
   left_join(b9, by = c("pais", "año")) %>%
   left_join(b10, by = c("pais", "año")) %>%
+  left_join(b11, by = c("pais", "año")) %>%
+  left_join(b12, by = c("pais", "año")) %>%
   
   mutate(año = as.integer(año))  # importante: convertir año a número
 View(base_union)
